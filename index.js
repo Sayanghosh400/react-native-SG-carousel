@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         width: wp('100%'),
-        flexGrow: 0, // Prevents ScrollView from taking extra space
+        flexGrow: 0,
     },
     slide: {
-        width: wp('100%'), // Ensures each slide takes the full width
+        width: wp('100%'),
         justifyContent: 'center',
         alignItems: 'center',
     },
