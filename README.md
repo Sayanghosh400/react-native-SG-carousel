@@ -13,7 +13,7 @@ npm install react-native-sg-carousel
 
 yarn add react-native-sg-carousel
 
----
+```
 
 ## Props
 
@@ -29,7 +29,6 @@ yarn add react-native-sg-carousel
 
 </details>
 
-                       |
 ---
 
 ## Usage
@@ -70,4 +69,4 @@ const styles = StyleSheet.create({
     margin: 10
   },
 });
-```
+---
