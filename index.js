@@ -1,7 +1,6 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import SameAreaView from './SameAreaView';
 
 const CustomCaraouselView = ({
     children,
