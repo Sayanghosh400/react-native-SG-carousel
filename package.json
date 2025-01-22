@@ -1,6 +1,6 @@
 {
   "name": "react-native-sg-carousel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A custom carousel for react-native",
   "main": "index.js",
   "type": "module",
