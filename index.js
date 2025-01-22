@@ -10,6 +10,7 @@ const CustomCaraouselView = ({
 }) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
+    const [contentHeight, setContentHeight] = useState(0);
 
     const childrenArray = React.Children.toArray(children);
 
@@ -19,17 +20,26 @@ const CustomCaraouselView = ({
         setActiveIndex(currentIndex);
     };
 
+    const measureContentHeight = (event) => {
+        const { height } = event.nativeEvent.layout;
+        setContentHeight(Math.max(contentHeight, height));
+    };
+
     return (
         <View>
             <ScrollView
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                style={[styling]}
+                style={[styles.scrollContainer, styling, { height: contentHeight }]}
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
             >
-                {childrenArray}
+                {childrenArray.map((child, index) => (
+                    <View key={index} onLayout={measureContentHeight}>
+                        {child}
+                    </View>
+                ))}
             </ScrollView>
 
             <View style={styles.bubbleContainer}>
@@ -46,10 +56,10 @@ const CustomCaraouselView = ({
                 ))}
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default CustomCaraouselView
+export default CustomCaraouselView;
 
 const styles = StyleSheet.create({
     scrollBubble: {
@@ -73,5 +83,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: wp('10%'),
         marginTop: hp('2%'),
-    }
+    },
+    scrollContainer: {
+        width: wp('100%'),
+        alignSelf: 'stretch',
+    },
 });
