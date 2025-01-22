@@ -29,7 +29,7 @@ yarn add react-native-sg-carousel
 
 </details>
 
----
+
 
 ## Usage
 import { Image, StyleSheet, View } from 'react-native';
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     margin: 10
   },
 });
----
+
