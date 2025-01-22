@@ -2,9 +2,14 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const SameAreaView = ({ children, styling, center }: { children: React.ReactNode, styling?: any, center?: boolean }) => {
+interface Props {
+    children: React.ReactNode
+    styling?: any
+}
+
+const SameAreaView = ({ children, styling }: Props) => {
     return (
-        <View style={[styles.sameArea, center && styles.centeredView, styling]}>
+        <View style={[styles.sameArea, styling]}>
             {children}
         </View>
     )
@@ -17,11 +22,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-
-    centeredView: {
-        justifyContent: 'space-between',
-        width: wp('90%'),
-        alignSelf: 'center',
-        marginTop: hp('5%'),
-    }
 })

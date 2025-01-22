@@ -66,10 +66,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#004CA3',
     },
     bubbleContainer: {
-        flexDirection: 'row',
         justifyContent: 'space-between',
         alignSelf: 'center',
-        width: wp('10%'),
-        marginBottom: hp('2%'),
+        width: wp('9%'),
     }
 });
