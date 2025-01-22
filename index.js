@@ -33,19 +33,19 @@ const CustomCaraouselView = ({
                 {childrenArray}
             </ScrollView>
 
-            <SameAreaView styling={styles.bubbleContainer}>
+            <View styling={styles.bubbleContainer}>
                 {childrenArray.map((_, index) => (
                     <View
                         key={index}
                         style={[
                             styles.scrollBubble,
                             activeIndex === index && styles.activeBubble,
-                            { backgroundColor: bubleColor },
-                            { backgroundColor: activeIndex === index && activeBubleColor }
+                            bubleColor && { backgroundColor: bubleColor },
+                            activeBubleColor && { backgroundColor: activeIndex === index && activeBubleColor }
                         ]}
                     />
                 ))}
-            </SameAreaView>
+            </View>
         </View>
     )
 }
@@ -61,13 +61,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     activeBubble: {
+        marginLeft: wp('1%'),
         width: wp('3%'),
         height: hp('1.5%'),
         backgroundColor: '#004CA3',
+        borderRadius: 10,
     },
     bubbleContainer: {
-        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
         alignSelf: 'center',
-        width: wp('9%'),
+        justifyContent: 'space-between',
+        width: wp('10%'),
     }
 });
