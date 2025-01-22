@@ -32,7 +32,7 @@ const CustomCaraouselView = ({
                 {childrenArray}
             </ScrollView>
 
-            <View styling={styles.bubbleContainer}>
+            <View style={styles.bubbleContainer}>
                 {childrenArray.map((_, index) => (
                     <View
                         key={index}
@@ -72,5 +72,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'space-between',
         width: wp('10%'),
+        marginTop: hp('2%'),
     }
 });
