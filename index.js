@@ -3,12 +3,16 @@ import React, { useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import SameAreaView from './SameAreaView';
 
-const CustomCaraouselView = ({ children, styling }) => {
+const CustomCaraouselView = ({
+    children,
+    styling,
+    bubleColor,
+    activeBubleColor
+}) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
     const childrenArray = React.Children.toArray(children);
-    const totalChildren = childrenArray.length;
 
     const handleScroll = (event) => {
         const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -22,20 +26,22 @@ const CustomCaraouselView = ({ children, styling }) => {
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                style={[{ marginTop: hp('2%') }, styling]}
+                style={[styling]}
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
             >
                 {childrenArray}
             </ScrollView>
 
-            <SameAreaView styling={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center', width: wp('9%') }}>
+            <SameAreaView styling={styles.bubbleContainer}>
                 {childrenArray.map((_, index) => (
                     <View
                         key={index}
                         style={[
                             styles.scrollBubble,
-                            activeIndex === index && styles.activeBubble
+                            activeIndex === index && styles.activeBubble,
+                            { backgroundColor: bubleColor },
+                            { backgroundColor: activeIndex === index && activeBubleColor }
                         ]}
                     />
                 ))}
@@ -48,7 +54,6 @@ export default CustomCaraouselView
 
 const styles = StyleSheet.create({
     scrollBubble: {
-        marginBottom: hp('2%'),
         marginLeft: wp('1%'),
         width: wp('2%'),
         height: hp('1%'),
@@ -60,11 +65,11 @@ const styles = StyleSheet.create({
         height: hp('1.5%'),
         backgroundColor: '#004CA3',
     },
-    dailyUpdateCard: {
-        elevation: 3,
-        marginTop: hp('1%'),
+    bubbleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignSelf: 'center',
-        width: wp('90%'),
-        height: hp('35%'),
+        width: wp('10%'),
+        marginBottom: hp('2%'),
     }
 });
