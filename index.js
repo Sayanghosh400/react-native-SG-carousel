@@ -1,16 +1,14 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CustomCaraouselView = ({
     children,
     styling,
     bubleColor,
-    activeBubleColor
+    activeBubleColor,
 }) => {
-
     const [activeIndex, setActiveIndex] = useState(0);
-    const [contentHeight, setContentHeight] = useState(0);
 
     const childrenArray = React.Children.toArray(children);
 
@@ -20,23 +18,18 @@ const CustomCaraouselView = ({
         setActiveIndex(currentIndex);
     };
 
-    const measureContentHeight = (event) => {
-        const { height } = event.nativeEvent.layout;
-        setContentHeight(Math.max(contentHeight, height));
-    };
-
     return (
-        <View>
+        <View style={styles.container}>
             <ScrollView
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                style={[styles.scrollContainer, styling, { height: contentHeight }]}
+                style={[styles.scrollContainer, styling]}
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
             >
                 {childrenArray.map((child, index) => (
-                    <View key={index} onLayout={measureContentHeight}>
+                    <View key={index} style={styles.slide}>
                         {child}
                     </View>
                 ))}
@@ -50,7 +43,7 @@ const CustomCaraouselView = ({
                             styles.scrollBubble,
                             activeIndex === index && styles.activeBubble,
                             bubleColor && { backgroundColor: bubleColor },
-                            activeBubleColor && { backgroundColor: activeIndex === index && activeBubleColor }
+                            activeBubleColor && activeIndex === index && { backgroundColor: activeBubleColor },
                         ]}
                     />
                 ))}
@@ -62,6 +55,19 @@ const CustomCaraouselView = ({
 export default CustomCaraouselView;
 
 const styles = StyleSheet.create({
+    container: {
+        width: wp('100%'),
+        alignItems: 'center',
+    },
+    scrollContainer: {
+        width: wp('100%'),
+        flexGrow: 0, // Prevents ScrollView from taking extra space
+    },
+    slide: {
+        width: wp('100%'), // Ensures each slide takes the full width
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     scrollBubble: {
         marginLeft: wp('1%'),
         width: wp('2%'),
@@ -83,9 +89,5 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: wp('10%'),
         marginTop: hp('2%'),
-    },
-    scrollContainer: {
-        width: wp('100%'),
-        alignSelf: 'stretch',
     },
 });
